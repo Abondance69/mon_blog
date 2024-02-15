@@ -1,0 +1,67 @@
+Explication : 
+    -Nom de la base de donnée blog, 
+    -Mot de passe : aucun mot de passe
+End
+
+
+
+
+Procédure de la création d'un projet symfony
+
+Etape 1 :
+    -Créer un nouveau projet (symfony new my_project_directory --version="7.0.*" --webapp)
+    -Créer la base de données dans le dossiers .ENV
+    -Créer la base de données avec Doctrine(php bin/console doctrine:database:create)
+End
+
+Etape 2 :
+    -Créer une entité (php bin/console make:entity)
+    -Faire une migration (php bin/console make:migration)
+    -On lance la migration (php bin/console doctrine:migrations:migrate)
+End
+
+Etape 3 :
+    -Instancier une EntityManagerInterface et HttpFoundation
+    -On utilse la méthode getRepository de l'EntityManagerInterface
+    -On peut render matieres et dump célà dans la vue
+End
+
+Etape 4 :
+    -Créer une nouvelle form (php bin/console make:form) pour Matiere
+    -On create createForm, on vérifie les données et on flush dans la base de données
+    -On peut render matieres et dump célà dans la vue
+End
+
+Explication :
+    1.EntityManagerInterface
+    EntityManagerInterface est une interface dans Symfony qui fait partie du composant Doctrine.
+    Doctrine est une bibliothèque populaire en PHP utilisée pour la gestion des bases de données relationnelles.
+
+    L'interface EntityManagerInterface fournit des méthodes pour gérer les entités dans la couche de persistance de Doctrine. Elle est utilisée pour effectuer des opérations CRUD (Create, Read, Update, Delete) sur les objets entité, ainsi que pour gérer les transactions.
+
+    Voici quelques-unes des méthodes les plus couramment utilisées de EntityManagerInterface :
+    -persist(): Pour ajouter une nouvelle entité ou marquer une entité existante comme "managée".
+    -remove(): Pour marquer une entité à supprimer.
+    -flush(): Pour exécuter les opérations pendantes (comme les persistances et les suppressions) sur la base de données.
+    -find(): Pour rechercher une entité par son identifiant.
+    -getRepository(): Pour obtenir le référentiel (repository) d'une entité.
+
+    2.ORM
+    Un ORM, ou "Object-Relational Mapping", est une technique de programmation qui permet de mapper les objets d'un modèle de domaine vers les entrées d'une base de données relationnelle et vice versa.
+    En utilisant un ORM comme Doctrine, les développeurs peuvent manipuler des objets de données en utilisant des classes PHP plutôt que des requêtes SQL brutes. 
+    Cela rend le développement plus rapide, plus propre et plus maintenable. L'ORM s'occupe de la correspondance entre les objets et les tables de base de données, ainsi que de la gestion de la persistance des données.
+
+    
+
+    product.category.name :  récupérer le nom de la catégorie liée à un produit
+    <h1>{{ catégorie | trans }}</h1> dans config/packages/translation.yaml on peut mettre la langue en français
+    traduire le message flash, avec un TranslatorInterface dans le message et prends en paramètre la clé définie.
+
+    Empecher l'access de certaines routes à des utilisateurs non admin :
+    access_controll :
+        -{path : ^/category}
+
+    {% if is_granted('ROLE_ADMIN) %}
+    <a>Un lien pour un admin</a>
+    {% endif %}
+End
