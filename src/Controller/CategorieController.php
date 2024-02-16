@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Categorie;
@@ -16,22 +15,10 @@ class CategorieController extends AbstractController
     public function index(EntityManagerInterface $em, Request $request): Response
     {
         $categories = $em->getRepository(Categorie::class)->findAll();
-        $categorie = new Categorie();
-
-        $form = $this->createForm(CategorieType::class, $categorie);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $em->persist($categorie);
-            $em->flush();
-
-            return $this->redirectToRoute(route : 'app_categorie');
-        }
 
         return $this->render('categorie/index.html.twig', [
             'controller_name' => 'CategorieController',
             'categories' => $categories,
-            'form' => $form->createView()
         ]);
     }
 

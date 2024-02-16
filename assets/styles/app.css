@@ -11,6 +11,11 @@
     --submit-hover : rgb(0, 141, 125);
     --danger : rgb(255, 32, 32);
     --danger-hover : rgb(235, 0, 0);
+    --state : rgb(0, 127, 2);
+    --state-hover : rgb(0, 105, 2);
+    --admin : rgb(212, 120, 0);
+    --article : rgb(0, 105, 150);
+    --article-hover :rgb(0, 70, 100);
 }
 
 body {
@@ -24,6 +29,11 @@ li {
 a {
     text-decoration: none;
     color: white;
+}
+ 
+i {
+    color: white;
+    font-size: 15px;
 }
 
 .header {
@@ -91,12 +101,56 @@ a {
     margin: 0 6px;
 }
 
+.btn-state {
+    padding: 10px 12px;
+    border-radius: 5px;
+    background-color: var(--state);
+    display: inline;
+    margin: 0 6px;
+}
+
+.btn-state-logout {
+    padding: 10px 12px;
+    border-radius: 5px;
+    background-color: var(--danger);
+    display: inline;
+    margin: 0 6px;
+}
+
+.btn-admin {
+    padding: 10px 12px;
+    border-radius: 5px;
+    background-color: var(--admin);
+    display: inline;
+}
+
+.btn-article {
+    padding: 10px 12px;
+    border-radius: 5px;
+    background-color: var(--article);
+    display: inline;
+    margin: 0 6px;
+}
+
+
 .btn-success:hover {
     background-color: var(--sucess-hover);
 }
 
 .btn-danger:hover {
     background-color: var(--danger-hover);
+}
+
+.btn-state:hover {
+    background-color: var(--state-hover);
+}
+
+.btn-state-logout:hover {
+    background-color: var(--danger-hover) !important;
+}
+
+.btn-article:hover {
+    background-color: var(--article-hover);
 }
 
 
@@ -169,10 +223,14 @@ form {
     border-radius: 7px;
 }
 
+form h3{
+    color: white;
+}
+
 input {
     padding: 7px 10px;
     outline: none;
-    width: 89%;
+    width: 95%;
     margin: 10px 0;
 }
 
@@ -189,3 +247,17 @@ label {
     font-weight: bold;
 }
 
+
+input[type="submit"] { 
+    padding: 5px 8px;
+    cursor: pointer;
+    background-color: white;
+    color: var(--bg-color);
+    border: 2px solid var(--submit-hover);
+    font-weight: bold;
+}
+
+.para {
+    margin: 10px 0;
+    font-size: 15px;
+}

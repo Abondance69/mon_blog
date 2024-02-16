@@ -3,6 +3,14 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+<header class="header">
+    <nav class="nav">
+        <div class="nav-header">
+            <a href="{{ path('app_categorie') }}"><i class="fa-solid fa-arrow-left-long"></i> Retour</a>
+        </div>
+    </nav>
+</header>
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,17 +22,17 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <h3 class="h3 mb-3 font-weight-normal">Connectez-vous </h3>
+    <input type="email" value="{{ last_username }}" placeholder="Entre votre email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="password" name="password" id="inputPassword" placeholder="Entre votre mot de passe" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <p class="para">Vous n'avez pas de comptes? <a href="{{ path('app_register') }}">créer un comptes</a></p>
+
+    <button class="submit" type="submit">
         Sign in
     </button>
 </form>
