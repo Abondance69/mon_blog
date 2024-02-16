@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
 {
-    #[Route('/categorie', name: 'app_categorie')]
+    #[Route('/', name: 'app_categorie')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
         $categories = $em->getRepository(Categorie::class)->findAll();
@@ -36,17 +36,31 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/categorie/{id}', name: 'detail_categorie')]
-    public function detail($id, EntityManagerInterface $em): Response
-    {
-        $categorie = $em->getRepository(Categorie::class)->find($id);
+    public function detail(Categorie $categorie = null, EntityManagerInterface $em, Request $request): Response
+    {   
+        if ($categorie == null) {
+            return $this->redirectToRoute(route : 'app_categorie');
+        }
+
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            // le formulaire est bon
+            $em->persist($categorie);
+            $em->flush();
+
+            return $this->redirectToRoute(route : 'app_categorie');
+        }
     
         return $this->render('categorie/detail.html.twig', [
             'controller_name' => 'CategorieController',
             'categorie' => $categorie,
+            'form' => $form->createView()
         ]);
     }
 
-    #[Route("/createCategorie", name: 'create_categorie')]
+    #[Route("/create", name: 'create_categorie')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {   
         $categorie = new Categorie();
@@ -66,5 +80,19 @@ class CategorieController extends AbstractController
             'controller_name' => 'CategorieController',
             'form' => $form->createView(),
         ]);
+    }
+
+
+    #[Route("/delete/{id}", name: "delete_categorie")]
+    public function remove(Categorie $categorie = null, EntityManagerInterface $em, Request $request): Response
+    {
+        if ($categorie == null) {
+            return $this->redirectToRoute('app_categorie');
+        }
+
+        $em->remove($categorie);
+        $em->flush();
+
+        return $this->redirectToRoute('app_categorie');
     }
 }

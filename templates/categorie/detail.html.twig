@@ -1,1 +1,46 @@
-{{ dump(categorie) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+
+<header class="header">
+    <nav class="nav">
+        <div class="nav-header">
+          <h1><a href="{{ path('app_categorie') }}">The developer</a></h1>
+        </div>
+          
+        <div class="nav-link">
+            <ul>
+                <li><a href="">Link 1</a></li>
+                <li><a href="">Link 2</a></li>
+                <li><a href="">Link 3</a></li>
+                <li><a href="">Link 4</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="main"> 
+    <div class="main-header">
+        <div class="main-title">
+            <h3>{{ categorie.titre }}</h3>
+        </div>
+
+        <div class="auto">
+            <div class="btn btn-success">
+                <a href="{{ path('app_categorie') }}" class="btn-link">Listes des categories</a>
+            </div>
+
+              <div class="btn btn-danger">
+                <a href="{{ path('delete_categorie', {id: categorie.id}) }}" class="btn-link">Supprimer cette categorie</a>
+            </div>
+        </div>
+        
+    </div>
+
+    {{ form(form) }}
+</div>
+
+
+{% endblock %}

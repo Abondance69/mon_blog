@@ -6,16 +6,16 @@
 
 <header class="header">
     <nav class="nav">
-        <div>
-          <h1><a href="">Titre de mon blog</a></h1>
+        <div class="nav-header">
+          <h1><a href="{{ path('app_categorie') }}">The developer</a></h1>
         </div>
           
         <div class="nav-link">
             <ul>
-            <li><a href="">Link 1</a></li>
+                <li><a href="">Link 1</a></li>
                 <li><a href="">Link 2</a></li>
-            <li><a href="">Link 3</a></li>
-            <li><a href="">Link 4</a></li>
+                <li><a href="">Link 3</a></li>
+                <li><a href="">Link 4</a></li>
             </ul>
         </div>
     </nav>
@@ -29,25 +29,26 @@
         </div>
 
         <div class="btn btn-success">
-            <a href="">Créer un nouvelle Catégorie</a>
+            <a href="{{ path('create_categorie') }}">Créer un nouvelle Catégorie</a>
         </div>
     </div>
 
     <div class="matieres">
-        {% for categorie in categories %}
-        <div class="card">
-            <img style="width:100px" src="{{ asset('https://images.pexels.com/photos/2333332/pexels-photo-2333332.jpeg?auto=compress&cs=tinysrgb&w=260&h=450&dpr=2"') }}">View brochure (PDF)</img>
-            <h2>{{ categorie.titre }}</h2>
-            <a href="{{ path('detail_categorie', {id: categorie.id}) }}">
-                <button class="btn">voir la catégorie</button>
-            </a>
-        </div>
-        {% endfor %}
+        {% if categories is not empty %}
+            {% for categorie in categories %}
+            <div class="card">
+                <img style="width:100px" src="{{ asset('https://images.pexels.com/photos/2333332/pexels-photo-2333332.jpeg?auto=compress&cs=tinysrgb&w=260&h=450&dpr=2"') }}"></img>
+                <h2>{{ categorie.titre }}</h2>
+                <a href="{{ path('detail_categorie', {id: categorie.id}) }}">
+                    <button class="btn">voir la catégorie</button>
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+
+            </div>
+        {% endif %}
     </div>
-
-
-    {{ dump(categories) }}
-
-    {{ form(form) }}
 </div>
 {% endblock %}
