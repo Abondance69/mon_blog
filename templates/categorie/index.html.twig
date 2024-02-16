@@ -3,18 +3,51 @@
 {% block title %}Hello CategorieController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<header class="header">
+    <nav class="nav">
+        <div>
+          <h1><a href="">Titre de mon blog</a></h1>
+        </div>
+          
+        <div class="nav-link">
+            <ul>
+            <li><a href="">Link 1</a></li>
+                <li><a href="">Link 2</a></li>
+            <li><a href="">Link 3</a></li>
+            <li><a href="">Link 4</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/kazad/Music/Symfony/mon_blog/src/Controller/CategorieController.php</code></li>
-        <li>Your template at <code>C:/Users/kazad/Music/Symfony/mon_blog/templates/categorie/index.html.twig</code></li>
-    </ul>
+
+<div class="main">
+    <div class="main-header">
+        <div class="main-title">
+            <h3>Listes des catégories</h3>
+        </div>
+
+        <div class="btn btn-success">
+            <a href="">Créer un nouvelle Catégorie</a>
+        </div>
+    </div>
+
+    <div class="matieres">
+        {% for categorie in categories %}
+        <div class="card">
+            <img style="width:100px" src="{{ asset('https://images.pexels.com/photos/2333332/pexels-photo-2333332.jpeg?auto=compress&cs=tinysrgb&w=260&h=450&dpr=2"') }}">View brochure (PDF)</img>
+            <h2>{{ categorie.titre }}</h2>
+            <a href="{{ path('detail_categorie', {id: categorie.id}) }}">
+                <button class="btn">voir la catégorie</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    {{ dump(categories) }}
+
+    {{ form(form) }}
 </div>
 {% endblock %}
