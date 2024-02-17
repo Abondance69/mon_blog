@@ -28,15 +28,15 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Categorie $categorie = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateAdd = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $datePub = null;
-
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $auteur = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateAdd = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datePub = null;
 
     public function getId(): ?int
     {
@@ -92,12 +92,24 @@ class Article
         return $this;
     }
 
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): static
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
     public function getDateAdd(): ?\DateTimeInterface
     {
         return $this->dateAdd;
     }
 
-    public function setDateAdd(\DateTimeInterface $dateAdd): static
+    public function setDateAdd(?\DateTimeInterface $dateAdd): static
     {
         $this->dateAdd = $dateAdd;
 
@@ -109,21 +121,9 @@ class Article
         return $this->datePub;
     }
 
-    public function setDatePub(\DateTimeInterface $datePub): static
+    public function setDatePub(?\DateTimeInterface $datePub): static
     {
         $this->datePub = $datePub;
-
-        return $this;
-    }
-
-    public function getAuteur(): ?User
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(?User $auteur): static
-    {
-        $this->auteur = $auteur;
 
         return $this;
     }

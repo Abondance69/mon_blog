@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+
+<header class="header">
+    <nav class="nav">
+        <div class="nav-header">
+          <h1><a href="{{ path('app_categorie') }}">The developer</a></h1>
+        </div>
+          
+        <div class="nav-link">
+            <ul>
+                <li><a href="">Link 1</a></li>
+                <li><a href="">Link 2</a></li>
+                <li><a href="">Link 3</a></li>
+                <li><a href="">Link 4</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<div class="main"> 
+    <div class="main-header">
+        <div class="main-title">
+            <h3>Créer un article</h3>
+        </div>
+
+        {# {% if is_granted('ROLE_ADMIN') %} #}
+        <div class="auto">
+            <div class="btn btn-success">
+                <i class="fa-solid fa-plus"></i>
+                <a href="{{ path('create_article') }}">Créer une Catégorie</a>
+            </div>
+
+            <div class="btn btn-article">
+                <i class="fa-solid fa-plus"></i>
+                <a href="{{ path('create_article') }}">Créer un Article</a>
+            </div>
+            
+            <div class="btn btn-admin">
+                <i class="fa-solid fa-user-secret"></i>
+                <a href="{{ path('app_administration') }}"> Administration</a>
+            </div>
+        </div>
+        {# {% endif %} #}
+    </div>
+
+    {{ form(form) }}
+</div>
+
+{% endblock %}

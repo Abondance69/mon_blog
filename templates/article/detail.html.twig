@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello articleController!{% endblock %}
+
+{% block body %}
+
+<header class="header">
+    <nav class="nav">
+        <div class="nav-header">
+          <h1><a href="{{ path('app_article') }}">The developer</a></h1>
+        </div>
+          
+        <div class="nav-link">
+            <ul>
+                <li><a href="">Link 1</a></li>
+                <li><a href="">Link 2</a></li>
+                <li><a href="">Link 3</a></li>
+                <li><a href="">Link 4</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="main"> 
+    <div class="main-header">
+        <div class="main-title">
+            <h3>{{ article.titre }}</h3>
+        </div>
+
+        <div class="auto">
+            <div class="btn btn-success">
+                <a href="{{ path('app_article') }}" class="btn-link">Listes des articles</a>
+            </div>
+
+              <div class="btn btn-danger">
+                <a href="{{ path('delete_article', {id: article.id}) }}" class="btn-link">Supprimer cette article</a>
+            </div>
+        </div>
+        
+    </div>
+
+    {{ form(form) }}
+</div>
+
+
+{% endblock %}

@@ -14,6 +14,7 @@
     --state : rgb(0, 127, 2);
     --state-hover : rgb(0, 105, 2);
     --admin : rgb(212, 120, 0);
+    --admin-hover : rgb(188, 107, 0);
     --article : rgb(0, 105, 150);
     --article-hover :rgb(0, 70, 100);
 }
@@ -149,6 +150,10 @@ i {
     background-color: var(--danger-hover) !important;
 }
 
+.btn-admin:hover {
+    background-color: var(--admin-hover);
+}
+
 .btn-article:hover {
     background-color: var(--article-hover);
 }
@@ -209,9 +214,14 @@ i {
 }
 
 .empty {
-    background-color: var(--bg-color);
+    background-color: var(--danger);
+    padding: 40px;
 }
 
+.empty h3 {
+    color: white;
+    text-align: center;
+}
 
 /* Form */
 
@@ -261,3 +271,19 @@ input[type="submit"] {
     margin: 10px 0;
     font-size: 15px;
 }
+
+.textarea {
+    resize: none;
+    width: 95%;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100px;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.choice, .choice-Id, .choice-auteur {
+    margin: 5px 0;
+    padding: 4px 7px;
+}
+
