@@ -223,6 +223,13 @@ i {
     text-align: center;
 }
 
+.articles {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /* Form */
 
 form {

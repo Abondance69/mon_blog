@@ -29,6 +29,10 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute(route : 'app_categorie');
         }
 
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_categorie');
+        }
+
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
@@ -50,6 +54,10 @@ class CategorieController extends AbstractController
     #[Route("/create", name: 'create_categorie')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {   
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_categorie');
+        }
+
         $categorie = new Categorie();
 
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -70,9 +78,27 @@ class CategorieController extends AbstractController
     }
 
 
+    #[Route('/categorie-read/{titre}', name: 'read_categorie')]
+    public function read(Categorie $categorie = null, EntityManagerInterface $em, Request $request): Response
+    {   
+        if (!$categorie) {
+            return $this->redirectToRoute(route : 'app_categorie');
+        }
+    
+        return $this->render('categorie/read.html.twig', [
+            'controller_name' => 'CategorieController',
+            'categorie' => $categorie,
+        ]);
+    }
+
+
     #[Route("/delete/{id}", name: "delete_categorie")]
     public function remove(Categorie $categorie = null, EntityManagerInterface $em, Request $request): Response
     {
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_categorie');
+        }
+        
         if ($categorie == null) {
             return $this->redirectToRoute('app_categorie');
         }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,10 @@ class ArticleController extends AbstractController
     #[Route('/article/{id}', name: 'detail_article')]
     public function detail(Article $article = null, EntityManagerInterface $em, Request $request): Response
     {   
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_article');
+        }
+        
         if ($article == null) {
             return $this->redirectToRoute(route : 'app_article');
         }
@@ -47,9 +52,31 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[Route('/article-read/{titre}', name: 'read_article')]
+    public function read(Article $article = null, EntityManagerInterface $em, Request $request): Response
+    {   
+        if (!$article) {
+            return $this->redirectToRoute(route : 'app_article');
+        }
+    
+        $auteur = $article->getAuteur();
+    
+        return $this->render('article/read.html.twig', [
+            'controller_name' => 'ArticleController',
+            'article' => $article,
+            'auteur' => $auteur
+        ]);
+    }
+    
+    
+
     #[Route("/create-article", name: 'create_article')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {   
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_article');
+        }
+
         $article = new Article();
 
         $form = $this->createForm(ArticleType::class, $article);
@@ -71,7 +98,11 @@ class ArticleController extends AbstractController
 
     #[Route("/delete/{id}", name: "delete_article")]
     public function remove(Article $article = null, EntityManagerInterface $em, Request $request): Response
-    {
+    {   
+        if (!$authChecker->isGranted('ROLE_ADMIN')) { 
+            return $this->redirectToRoute('app_article');
+        }
+
         if ($article == null) {
             return $this->redirectToRoute('app_article');
         }
